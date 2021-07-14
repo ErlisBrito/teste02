@@ -1,0 +1,58 @@
+﻿@model IEnumerable<teste02.Models.DonoModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Adicionando Novo Dono</h2>
+
+<p>
+    <a asp-action="Create">Adicionando Novo Dono</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>Cães</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @for (int i = 0; i < item.ListaCaoModel.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <span>@item.ListaCaoModel[i].Nome</span>
+                        }
+                        else
+                        {
+                            <span>, @item.ListaCaoModel[i].Nome</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.Id }) |
+                    @Html.ActionLink("Adicionar Cão", "CadastrarCao", new { donoId = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
