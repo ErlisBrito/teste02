@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using teste02.Util;
 
 namespace teste02.Models
@@ -10,9 +8,12 @@ namespace teste02.Models
     public class RelatorioModel
     {
         public int DonoId { get; set; }
+        [Display(Name = "Nome do Dono")]
         public string Nome { get; set; }
         public int CaoId { get; set; }
+        [Display(Name = "Nome do Cão")]
         public string CaoNome { get; set; }
+        [Display(Name = "Raça")]
         public string Raca { get; set; }
 
 

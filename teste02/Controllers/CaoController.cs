@@ -12,22 +12,25 @@ namespace teste02.Controllers
             return View(lstCao);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(int donoId)
         {
-            return View();
+            var caoModel = new CaoModel() { DonoId = donoId };
+            return View(caoModel);
         }
 
         [HttpPost]
         public IActionResult Create(CaoModel caoModel)
         {
+
             caoModel.RegistrarCao();
+
             return RedirectToAction("Index", "Cao");
         }
 
         public IActionResult Edit(int id)
         {
             var caoModel = new CaoModel { Id = id };
-            caoModel.ObterCao();
+            caoModel.ListarCao();
             return View(caoModel);
         }
 
@@ -41,15 +44,26 @@ namespace teste02.Controllers
         public IActionResult Details(int id)
         {
             var caoModel = new CaoModel { Id = id };
-            caoModel.ObterCao();
+            caoModel.ListarCao();
             return View(caoModel);
         }
 
+        
+
         public IActionResult Delete(int id)
         {
+            var donoCaoModel = new DonoCaoModel { CaoId = id };
             var caoModel = new CaoModel { Id = id };
+            donoCaoModel.DeletarCaoDono();
             caoModel.DeletarCao();
             return RedirectToAction("Index", "Cao");
         }
-    }
+
+        public IActionResult FiltrarCao(CaoModel caoModel)
+        {
+          
+            caoModel.FiltrarCao();
+            return RedirectToAction("Index", "Cao");
+        }
+}
 }

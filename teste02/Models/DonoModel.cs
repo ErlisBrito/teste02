@@ -61,10 +61,9 @@ namespace teste02.Models
 
         public void DeletarDono()
         {
-            string sql = $"DELETE FROM Dono WHERE Id = {Id}";
+            string sql = $"DELETE FROM Dono WHERE Id = {Id};";
             var objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
-
         }
 
         public void ObterDono()

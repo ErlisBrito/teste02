@@ -1,58 +1,42 @@
 ﻿@model IEnumerable<teste02.Models.RelatorioModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Relatório";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h4>Relatório</h4>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DonoId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CaoId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CaoNome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Raca
+                @Html.DisplayNameFor(model => model.Raca)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CaoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Raca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CaoNome)
-            </td>
-            <td>
-                Excel
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Raca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaoNome)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+

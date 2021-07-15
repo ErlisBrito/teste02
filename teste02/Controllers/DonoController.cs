@@ -52,7 +52,9 @@ namespace teste02.Controllers
 
         public IActionResult Delete(int id)
         {
+            var donoCaoModel = new DonoCaoModel { DonoId = id };
             var donoModel = new DonoModel { Id = id };
+            donoCaoModel.DeletarDonoCao();
             donoModel.DeletarDono();
             return RedirectToAction("Index", "Dono");
         }

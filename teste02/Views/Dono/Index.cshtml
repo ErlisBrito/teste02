@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<teste02.Models.DonoModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dono";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Adicionando Novo Dono</h2>
+<h4>Cadastrar Dono</h4>
 
 <p>
     <a asp-action="Create">Adicionando Novo Dono</a>
@@ -50,7 +50,7 @@
                     @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Deletar", "Delete", new { id = item.Id }) |
-                    @Html.ActionLink("Adicionar Cão", "CadastrarCao", new { donoId = item.Id })
+                    @Html.ActionLink("Adicionar Cão", "Create", "Cao", new { donoId = item.Id })
                 </td>
             </tr>
         }

@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 using teste02.Util;
+using Xunit;
+using Xunit.Sdk;
 
 namespace teste02.Models
 {
@@ -9,11 +13,13 @@ namespace teste02.Models
     {
         public int Id { get; set; }
 
+        public int DonoId { get; set; }
+
+        [Required(ErrorMessage = "Informe o nome do seu cão!")]
         public string Nome { get; set; }
 
+        [Display(Name = "Raça"), Required(ErrorMessage = "Informe a raça do seu cão!")]
         public string Raca { get; set; }
-        
-   
 
         public List<CaoModel> ListarCao()
         {
@@ -31,7 +37,7 @@ namespace teste02.Models
                         Id = int.Parse(dt.Rows[i]["Id"].ToString()),
                         Nome = dt.Rows[i]["Nome"].ToString(),
                         Raca = dt.Rows[i]["Raca"].ToString()
-                        
+
                     };
                     lstCao.Add(caoModel);
                 }
@@ -45,6 +51,13 @@ namespace teste02.Models
             string sql = $"INSERT INTO Cao(Raca, Nome) VALUES ('{Raca}','{Nome}');";
             var objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
+            var cao = ObterCao();
+            var donoCaoModel = new DonoCaoModel();
+            donoCaoModel.CaoId = cao.Id;
+            donoCaoModel.DonoId = DonoId;
+            donoCaoModel.InserirDonoCao();
+
+
         }
 
         public void AtualizarCao()
@@ -65,7 +78,7 @@ namespace teste02.Models
 
         public void FiltrarCao()
         {
-            string sql = $"SELECT Raca, Nome FROM Cao WHERE Id = {Id}";
+            string sql = $"SELECT * FROM Cao where Raca ='{Raca}'";
             var objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -76,5 +89,25 @@ namespace teste02.Models
                 Raca = dt.Rows[0]["Raca"].ToString();
             }
         }
+
+        public CaoModel ObterCao()
+        {
+            string sql = $"SELECT Id, Nome, Raca FROM Cao WHERE Nome = '{Nome}' " +
+                $"AND Raca = '{Raca}'";
+            var objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            var caoModel = new CaoModel();
+           
+
+            if (dt != null && dt.Rows.Count == 1)
+            {
+                caoModel.Id = int.Parse(dt.Rows[0]["Id"].ToString());
+                caoModel.Nome = dt.Rows[0]["Nome"].ToString();
+                caoModel.Raca = dt.Rows[0]["Raca"].ToString();
+            }
+            return caoModel;
+        }
+        
     }
 }
