@@ -108,6 +108,20 @@ namespace teste02.Models
             }
             return caoModel;
         }
-        
+
+        public void ObterCaoo()
+        {
+            string sql = $"SELECT Id, Raca, Nome FROM Cao WHERE Id = {Id}";
+            var objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            if (dt != null && dt.Rows.Count == 1)
+            {
+                Id = int.Parse(dt.Rows[0]["Id"].ToString());
+                Raca = dt.Rows[0]["Raca"].ToString();
+                Nome = dt.Rows[0]["Nome"].ToString();
+            }
+        }
+   
     }
 }

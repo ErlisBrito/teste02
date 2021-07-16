@@ -30,13 +30,15 @@ namespace teste02.Controllers
         public IActionResult Edit(int id)
         {
             var caoModel = new CaoModel { Id = id };
-            caoModel.ListarCao();
+            caoModel.ObterCaoo();
             return View(caoModel);
         }
 
         [HttpPost]
         public IActionResult Edit(CaoModel caoModel)
         {
+            
+           
             caoModel.AtualizarCao();
             return RedirectToAction("Index", "Cao");
         }
