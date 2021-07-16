@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<teste02.Models.CaoModel>
 
+
 @{
     ViewData["Title"] = "Cão";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Cadastrar Cão</h4>
-
-<p>
-    <a asp-action="Create">Adicionando Novo Cão</a>
-</p>
+<h4>Lista de Cães</h4>
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Pesquisa">
+            <input type="text" name="pesquisaRaca" id="pesquisaRaca" placeholder="Pesquisar por Raça">
+            <input type="submit" value="Pesquisar" class="btn btn-primary btn-sm" />
+        </form>
+    </div>
+</div>
+<hr />
+<hr />
 
 <table class="table">
     <thead>
@@ -23,13 +30,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Raca)
             </th>
-            <th></th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
@@ -48,3 +57,6 @@
         }
     </tbody>
 </table>
+<script>
+
+</script>

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using teste02.Models;
 
 namespace teste02.Controllers
@@ -10,6 +12,22 @@ namespace teste02.Controllers
             var caoModel = new CaoModel();
             var lstCao = caoModel.ListarCao();
             return View(lstCao);
+        }
+
+        public IActionResult Pesquisa(string pesquisaRaca)
+        { 
+            var caoModel = new CaoModel();
+            var lstCao = caoModel.ListarCao();
+            if (pesquisaRaca != null)
+            {
+                 lstCao = caoModel.ListarCao().Where(x => x.Raca.ToUpper().Trim()
+                .Equals(pesquisaRaca.ToUpper().Trim())).ToList(); 
+            }
+            else
+            {
+                lstCao = caoModel.ListarCao();
+            }
+            return View("Index", lstCao);
         }
 
         public IActionResult Create(int donoId)
@@ -37,8 +55,6 @@ namespace teste02.Controllers
         [HttpPost]
         public IActionResult Edit(CaoModel caoModel)
         {
-            
-           
             caoModel.AtualizarCao();
             return RedirectToAction("Index", "Cao");
         }
@@ -46,11 +62,11 @@ namespace teste02.Controllers
         public IActionResult Details(int id)
         {
             var caoModel = new CaoModel { Id = id };
-            caoModel.ListarCao();
+            caoModel.ObterCaoo();
             return View(caoModel);
         }
 
-        
+
 
         public IActionResult Delete(int id)
         {
@@ -63,9 +79,9 @@ namespace teste02.Controllers
 
         public IActionResult FiltrarCao(CaoModel caoModel)
         {
-          
+
             caoModel.FiltrarCao();
             return RedirectToAction("Index", "Cao");
         }
-}
+    }
 }
